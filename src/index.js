@@ -3,6 +3,7 @@ import {stdin, stdout, cwd, exit} from 'node:process';
 import {showFilesAndFolders} from "./reader.js";
 import {changeHomeDir, navigateToFolder} from "./navigation.js";
 import {getUserNameFromArgs} from "./utils.js";
+import {fileOperationHandler} from "./FilesOperation/fileOperationHandler.js";
 
 
 const userName = getUserNameFromArgs()
@@ -26,9 +27,8 @@ const handleUserInput = async (input) => {
         await navigateToFolder(...args)
     } else if (command === 'ls') {
         await showFilesAndFolders()
-    } else if (command === 'ls' || 'cat' || 'add' || 'rn' || 'cp' || 'mv' || 'rm') {
-
-
+    } else if (command === 'cat' || 'add' || 'rn' || 'cp' || 'mv' || 'rm') {
+        await fileOperationHandler(command, ...args)
     } else {
         console.log('The command you entered does not exist.')
     }
