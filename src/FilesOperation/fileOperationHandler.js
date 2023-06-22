@@ -2,6 +2,7 @@ import {catFile} from "./catFile.js";
 import {createNewFile} from "./createNewFile.js";
 import {renameFile} from "./rename.js";
 import {copyFile, removeFile} from "./copyFile.js";
+import {deleteFile} from "./deleteFile.js";
 
 export const fileOperationHandler = async (command, ...args) => {
     const [first, second] = args
@@ -18,6 +19,8 @@ export const fileOperationHandler = async (command, ...args) => {
             await copyFile(first, second)
         } else if (command === 'mv') {
             await removeFile(first, second)
+        } else if (command === 'rm') {
+            await deleteFile(first)
         }
 
     } catch (err) {
