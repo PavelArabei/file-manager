@@ -4,6 +4,7 @@ import {showFilesAndFolders} from "./reader.js";
 import {changeHomeDir, navigateToFolder} from "./navigation.js";
 import {getUserNameFromArgs} from "./utils.js";
 import {fileOperationHandler} from "./FilesOperation/fileOperationHandler.js";
+import {OsHandler} from "./OS/OShandler.js";
 
 
 const userName = getUserNameFromArgs()
@@ -27,8 +28,10 @@ const handleUserInput = async (input) => {
         await navigateToFolder(...args)
     } else if (command === 'ls') {
         await showFilesAndFolders()
-    } else if (command === 'cat' || 'add' || 'rn' || 'cp' || 'mv' || 'rm') {
+    } else if (command === 'cat' || command === 'add' || command === 'rn' || command === 'cp' || command === 'mv' || command === 'rm') {
         await fileOperationHandler(command, ...args)
+    } else if (command === 'os') {
+        await OsHandler(args[0])
     } else {
         console.log('The command you entered does not exist.')
     }
