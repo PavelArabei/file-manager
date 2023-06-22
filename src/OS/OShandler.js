@@ -1,13 +1,13 @@
 import {EOL} from "./EOL.js";
+import {CPUS} from "./CPUS.js";
 
 export const OsHandler = async (arg) => {
     try {
         if (!arg) throw new Error('Missing first argument')
         if (arg === '--EOL') {
             await EOL(arg)
-            //  await catFile(first)
         } else if (arg === '--cpus') {
-            // await createNewFile(first)
+            await CPUS()
         } else if (arg === '--homedir') {
             //  await renameFile(first, second)
         } else if (arg === '--username') {
