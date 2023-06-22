@@ -1,5 +1,6 @@
 import {EOL} from "./EOL.js";
 import {CPUS} from "./CPUS.js";
+import {homeDir} from "./homeDir.js";
 
 export const OsHandler = async (arg) => {
     try {
@@ -9,7 +10,7 @@ export const OsHandler = async (arg) => {
         } else if (arg === '--cpus') {
             await CPUS()
         } else if (arg === '--homedir') {
-            //  await renameFile(first, second)
+            await homeDir()
         } else if (arg === '--username') {
             // await copyFile(first, second)
         } else if (arg === '--architecture') {
