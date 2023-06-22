@@ -1,9 +1,16 @@
 import {createInterface} from 'node:readline/promises';
-import {stdin, stdout, cwd} from 'node:process';
+import {stdin, stdout, cwd, exit} from 'node:process';
 import {showFilesAndFolders} from "./reader.js";
 import {changeHomeDir, navigateToFolder} from "./navigation.js";
+import {getUserNameFromArgs} from "./utils.js";
+
+
+const userName = getUserNameFromArgs()
+
+console.log(`Thank you for using File Manager, ${userName}, goodbye!`)
 
 changeHomeDir()
+console.log(`You are currently in ${cwd()}`)
 
 const rl = createInterface({
     input: stdin,
@@ -13,16 +20,22 @@ const rl = createInterface({
 const handleUserInput = async (input) => {
     const [command, ...args] = input.trim().split(' ')
 
-    if (command === 'cd') {
+    if (command === '.exit') {
+        rl.close()
+    } else if (command === 'cd') {
         await navigateToFolder(...args)
     } else if (command === 'ls') {
-        await showFilesAndFolders(currentPath)
+        await showFilesAndFolders()
+    } else if (command === 'ls' || 'cat' || 'add' || 'rn' || 'cp' || 'mv' || 'rm') {
+
+
+    } else {
+        console.log('The command you entered does not exist.')
     }
 
     console.log(`You are currently in ${cwd()}`)
 
 }
-console.log(`You are currently in ${cwd()}`)
 
 
 rl.setPrompt('> ');
@@ -34,3 +47,7 @@ rl.on('line', async (input) => {
 });
 
 
+rl.on('close', () => {
+    console.log(`\nThank you for using File Manager, ${userName}, goodbye!`)
+    exit()
+})
