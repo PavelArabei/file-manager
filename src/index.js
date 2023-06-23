@@ -7,6 +7,7 @@ import {getUserNameFromArgs} from "./utils.js";
 import {fileOperationHandler} from "./FilesOperation/fileOperationHandler.js";
 import {OsHandler} from "./OS/OShandler.js";
 import {hash} from "./hash/hash.js";
+import {compressDecompress} from "./compressOperations/compress.js";
 
 
 const userName = getUserNameFromArgs()
@@ -36,6 +37,10 @@ const handleUserInput = async (input) => {
         await OsHandler(args[0])
     } else if (command === 'hash') {
         await hash(args[0])
+    } else if (command === 'compress') {
+        await compressDecompress(false, ...args)
+    } else if (command === 'decompress') {
+        await compressDecompress(true, ...args)
     } else {
         console.log('The command you entered does not exist.')
     }

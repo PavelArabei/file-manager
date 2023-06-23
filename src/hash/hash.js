@@ -18,7 +18,6 @@ export const hash = async (fileName) => {
             .digest('hex');
         console.log(res)
 
-
     } catch (err) {
         console.log(err.message)
     }
