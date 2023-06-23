@@ -2,9 +2,11 @@ import {createInterface} from 'node:readline/promises';
 import {stdin, stdout, cwd, exit} from 'node:process';
 import {showFilesAndFolders} from "./reader.js";
 import {changeHomeDir, navigateToFolder} from "./navigation.js";
+
 import {getUserNameFromArgs} from "./utils.js";
 import {fileOperationHandler} from "./FilesOperation/fileOperationHandler.js";
 import {OsHandler} from "./OS/OShandler.js";
+import {hash} from "./hash/hash.js";
 
 
 const userName = getUserNameFromArgs()
@@ -32,6 +34,8 @@ const handleUserInput = async (input) => {
         await fileOperationHandler(command, ...args)
     } else if (command === 'os') {
         await OsHandler(args[0])
+    } else if (command === 'hash') {
+        await hash(args[0])
     } else {
         console.log('The command you entered does not exist.')
     }
