@@ -6,7 +6,6 @@ import {isFileExist} from "../utils.js";
 export const createNewFile = async (fileName) => {
     try {
         const path = resolve(fileName)
-
         const isExist = await isFileExist(path)
         if (isExist) throw new Error('File already exist')
 

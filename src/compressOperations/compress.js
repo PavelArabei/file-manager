@@ -11,7 +11,6 @@ export const isPathTrue = async (oldFilePath, newFilePath) => {
         const oldPath = resolve(oldFilePath)
         const newPath = resolve(newFilePath)
 
-
         const isExist = await isFileExist(oldPath)
         if (!isExist) throw new Error('File does`t exist')
 
@@ -43,6 +42,3 @@ export const compressDecompress = async (unCompress, oldFilePath, newFilePath) =
     console.log(resLog)
 }
 
-
-// compress aaa.txt .
-// decompress aaa.txt.gz .

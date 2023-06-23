@@ -1,14 +1,12 @@
 import {createReadStream} from 'node:fs';
-import {cwd} from 'node:process';
-import {join} from 'node:path';
+import {resolve} from 'node:path';
 import {isFileExist} from "../utils.js";
 
 
 export const catFile = async (fileName) => {
 
     try {
-        const path = join(cwd(), fileName)
-
+        const path = resolve(fileName)
         const isFile = await isFileExist(path)
         if (!isFile) throw new Error('This file does`t exist')
 
