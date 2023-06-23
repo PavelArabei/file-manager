@@ -1,5 +1,4 @@
-import {cwd} from 'node:process';
-import {join} from 'node:path';
+import {resolve} from 'node:path';
 import {unlink} from 'node:fs/promises';
 import {pipeline} from 'node:stream/promises';
 
@@ -13,8 +12,8 @@ export const copyFile = async (oldFilePath, newFilePath) => {
 
         if (!newFilePath) throw new Error('Missing second argument')
 
-        const oldPath = join(cwd(), oldFilePath)
-        const newPath = join(cwd(), newFilePath)
+        const oldPath = resolve(oldFilePath)
+        const newPath = resolve(newFilePath)
 
         const isExist = await isFileExist(oldPath)
         if (!isExist) throw new Error('File does`t exist')
