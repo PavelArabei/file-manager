@@ -2,6 +2,7 @@ import {EOL} from "./EOL.js";
 import {CPUS} from "./CPUS.js";
 import {homeDir} from "./homeDir.js";
 import {userName} from "./userName.js";
+import {osArchitecture} from "./osArchitecture.js";
 
 export const OsHandler = async (arg) => {
     try {
@@ -15,7 +16,9 @@ export const OsHandler = async (arg) => {
         } else if (arg === '--username') {
             await userName()
         } else if (arg === '--architecture') {
-            //await removeFile(first, second)
+            await osArchitecture()
+        } else {
+            throw new Error('Such argument does`t exist')
         }
 
 
