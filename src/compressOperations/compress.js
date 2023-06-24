@@ -1,7 +1,7 @@
 import {resolve, join, extname, basename} from 'node:path';
 import {isFileExist} from "../utils.js";
 import {createReadStream, createWriteStream} from 'node:fs';
-import {createGzip, createGunzip} from 'node:zlib';
+import {createBrotliCompress, createBrotliDecompress} from 'node:zlib';
 import {pipeline} from 'node:stream/promises';
 
 export const isPathTrue = async (oldFilePath, newFilePath) => {
@@ -28,11 +28,11 @@ export const compressDecompress = async (unCompress, oldFilePath, newFilePath) =
     const [file, newFolder] = pathData
     const newFileName = unCompress
         ? `${basename(oldFilePath, extname(oldFilePath))}`
-        : `${basename(oldFilePath)}.gz`
+        : `${basename(oldFilePath)}.br`
 
     const pathToNewFile = join(newFolder, newFileName)
 
-    const zip = unCompress ? createGunzip() : createGzip();
+    const zip = unCompress ? createBrotliDecompress() : createBrotliCompress();
     const rs = createReadStream(file);
     const ws = createWriteStream(pathToNewFile);
 
